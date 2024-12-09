@@ -6,7 +6,7 @@ from bot.netkeiba.const import URL_BASE
 def parse_calendar(html: str) -> list[str]:
     soup = BeautifulSoup(html, 'html.parser')
     race_table = soup.find('table', summary="レーススケジュールカレンダー")
-    urls = [URL_BASE + a['href'] for a in race_table.find_all('a', href=True)]
+    urls = [URL_BASE + a['href'].rstrip('/') for a in race_table.find_all('a', href=True)]
     return urls
 
 
@@ -61,6 +61,6 @@ def test_parse_calendar():
         """
     urls = parse_calendar(html)
     assert len(urls) == 10
-    assert urls[0] == "https://db.netkeiba.com/race/list/19900105/"
-    assert urls[1] == "https://db.netkeiba.com/race/list/19900106/"
-    assert urls[-1] == "https://db.netkeiba.com/race/list/19900128/"
+    assert urls[0] == "https://db.netkeiba.com/race/list/19900105"
+    assert urls[1] == "https://db.netkeiba.com/race/list/19900106"
+    assert urls[-1] == "https://db.netkeiba.com/race/list/19900128"
