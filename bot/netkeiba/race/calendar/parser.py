@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 
-from bot.race.const import URL_BASE
+from bot.netkeiba.const import URL_BASE
 
 
 def parse_calendar(html: str) -> list[str]:

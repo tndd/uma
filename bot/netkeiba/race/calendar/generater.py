@@ -1,4 +1,4 @@
-from bot.race.const import URL_RACE_LIST
+from bot.netkeiba.const import URL_RACE_LIST
 
 
 def gen_year_month() -> list[str]:

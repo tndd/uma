@@ -1,4 +1,4 @@
-from bot.race.calendar import generater
+from bot.netkeiba.race.calendar import generater
 
 
 def fetch_race_calender_html():
