@@ -1,8 +1,8 @@
-from bot.race import generate
+from bot.race.calendar import generater
 
 
 def fetch_race_calender_html():
-    urls = generate.gen_url_for_access_to_calendar()
+    urls = generater.gen_url_for_access_to_calendar()
     return urls
 
 
