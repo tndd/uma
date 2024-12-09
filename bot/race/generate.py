@@ -1,3 +1,6 @@
+from bot.race.const import URL_RACE_LIST
+
+
 def gen_year_month() -> list[str]:
     """
     各月ごとのカレンダー情報を取得するための年月リスト。
@@ -16,9 +19,8 @@ def gen_url_for_access_to_calendar():
     カレンダーからレースがあった日のレースリストページのURLを取得。
     """
     urls = []
-    prefix = 'https://db.netkeiba.com/race/list/'
     for ym in gen_year_month():
-        url = prefix + ym
+        url = URL_RACE_LIST + ym
         urls.append(url)
     return urls
 
@@ -38,5 +40,4 @@ def test_gen_url_for_access_to_calendar():
 
 
 if __name__ == "__main__":
-    test_gen_year_month()
-    test_gen_url_list_head()
+    pass
