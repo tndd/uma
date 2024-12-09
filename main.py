@@ -1,4 +1,5 @@
-from bot.netkeiba.race.calendar.harvester import fetch_all_race_calender_html
+from bot.netkeiba.race.calendar.manager import get_race_day_urls
 
 if __name__ == '__main__':
-    fetch_all_race_calender_html()
+    urls = get_race_day_urls()
+    print(urls)

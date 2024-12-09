@@ -1,6 +1,8 @@
+import os
+
 from bs4 import BeautifulSoup
 
-from bot.netkeiba.const import URL_BASE
+from bot.netkeiba.const import PATH_CALENDAR_CACHE, PATH_RACE_DAY_URLS, URL_BASE
 
 
 def parse_calendar(html: str) -> list[str]:
@@ -12,6 +14,20 @@ def parse_calendar(html: str) -> list[str]:
     race_table = race_calendar_div.find('table', summary="レーススケジュールカレンダー")
     urls = [URL_BASE + a['href'].rstrip('/') for a in race_table.find_all('a', href=True)]
     return urls
+
+
+def extract_store_race_day_urls() -> list[str]:
+    html_files = [f for f in os.listdir(PATH_CALENDAR_CACHE) if f.endswith('.html')]
+    all_urls = []
+    for html_file in html_files:
+        with open(os.path.join(PATH_CALENDAR_CACHE, html_file), 'r', encoding='UTF-8') as file:
+            html = file.read()
+            urls = parse_calendar(html)
+            all_urls.extend(urls)
+    # URLをテキストファイルに保存
+    with open(PATH_RACE_DAY_URLS, 'w', encoding='UTF-8') as output_file:
+        for url in all_urls:
+            output_file.write(url + '\n')
 
 
 def test_parse_calendar():
