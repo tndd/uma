@@ -1,1 +1,2 @@
-URL_RACE_LIST = 'https://db.netkeiba.com/race/list/'
+URL_BASE = 'https://db.netkeiba.com'
+URL_RACE_LIST = URL_BASE + '/race/list/'

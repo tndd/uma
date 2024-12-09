@@ -6,7 +6,6 @@ def fetch_race_calender_html():
     return urls
 
 
-
 def test_fetch_race_calender_html():
     urls = fetch_race_calender_html()
     assert urls[0] == "https://db.netkeiba.com/race/list/199001"
