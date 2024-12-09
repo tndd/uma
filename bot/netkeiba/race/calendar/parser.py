@@ -4,14 +4,19 @@ from bot.netkeiba.const import URL_BASE
 
 
 def parse_calendar(html: str) -> list[str]:
+    """
+    カレンダーから開催日のurlを抜き出し、リストで返す。
+    """
     soup = BeautifulSoup(html, 'html.parser')
-    race_table = soup.find('table', summary="レーススケジュールカレンダー")
+    race_calendar_div = soup.find('div', class_='race_calendar')
+    race_table = race_calendar_div.find('table', summary="レーススケジュールカレンダー")
     urls = [URL_BASE + a['href'].rstrip('/') for a in race_table.find_all('a', href=True)]
     return urls
 
 
 def test_parse_calendar():
     html = """
+        <div class="race_calendar_wrap">
         <div class="race_calendar">
         <h2><img src="https://cdn.netkeiba.com/img.db//style/netkeiba.ja/image/race_side_h_03.png" alt="レーススケジュール"></h2>
         <dl>
@@ -57,6 +62,7 @@ def test_parse_calendar():
         </tbody></table>
         </dd>
         </dl>
+        </div>
         </div>
         """
     urls = parse_calendar(html)
