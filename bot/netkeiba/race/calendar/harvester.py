@@ -7,7 +7,7 @@ def fetch_race_calender_html(url: str) -> str:
     }
     response = get(url, headers=headers)
     response.encoding = 'EUC-JP'  # netkeibaはEUC-JPエンコーディングを使用
-    save_path = f'bot/netkeiba/race/cache/calendar/{url.split("/")[-1]}.html'
+    save_path = f'bot/netkeiba/race/calendar/cache/{url.split("/")[-1]}.html'
     if response.status_code == 200:
         with open(save_path, 'w', encoding='UTF-8') as file:
             file.write(response.text)
@@ -22,5 +22,5 @@ def fetch_race_calender_htmls():
 
 
 if __name__ == '__main__':
-    url = 'https://db.netkeiba.com/race/list/19900106'
+    url = 'https://db.netkeiba.com/race/list/199001'
     fetch_race_calender_html(url)
