@@ -1,3 +1,5 @@
+from concurrent.futures import ThreadPoolExecutor
+
 from requests import get
 
 from bot.netkeiba.race.calendar.generater import gen_url_for_access_to_calendar
@@ -18,14 +20,11 @@ def fetch_race_calender_html(url: str) -> str:
         print(f"Error: Status code {response.status_code}")
 
 
-def fetch_all_race_calender_html():
-    return # まだ実行させない
+def fetch_all_race_calender_html(n_worker: int = 16):
     urls = gen_url_for_access_to_calendar()
-    for url in urls:
-        fetch_race_calender_html(url)
-
+    with ThreadPoolExecutor(max_workers=n_worker) as executor:
+        executor.map(fetch_race_calender_html, urls)
 
 
 if __name__ == '__main__':
-    url = 'https://db.netkeiba.com/race/list/199001'
-    fetch_race_calender_html(url)
+    pass
