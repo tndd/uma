@@ -13,3 +13,4 @@ dependencies = [
 testpaths = ["."]
 python_files = ["*.py"]
 pythonpath = "."
+addopts = "--import-mode=importlib"
